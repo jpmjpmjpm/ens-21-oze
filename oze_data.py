@@ -20,13 +20,13 @@ class OzeData:
         :return: pandas time series
         """
         dfw = self.df.filter(like=stream, axis=1)
-        dti = pd.date_range(self.df.at[0, 'FirstDayOfWeek'], periods=168, freq="H")
+        dti = pd.date_range(self.df.at[week_id, 'FirstDayOfWeek'], periods=168, freq="H")
         return pd.Series(dfw.iloc[week_id].values, index=dti)
 
 
 if __name__ == '__main__':
     oze_xt = OzeData('x_train_QwN5vrl.csv')
-    ts = oze_xt.get_ts(0, 'AHU_2_AIRFLOWTEMP')
+    ts = oze_xt.get_ts(10, 'AHU_3_AIRFLOWTEMP')
 
     plt.figure()
     ts.plot()
